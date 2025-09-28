@@ -26,7 +26,40 @@ Transform your iPhone lockscreen into a dynamic calendar display that automatica
 
 ## Quick Start
 
-### Option 1: Docker (Recommended)
+### Option 1: Pre-built Docker Image (Recommended)
+
+1. **Create project directory**
+   ```bash
+   mkdir iphone-lockscreen-calendar
+   cd iphone-lockscreen-calendar
+   ```
+
+2. **Download configuration files**
+   ```bash
+   # Download docker-compose.yml and config template
+   curl -O https://raw.githubusercontent.com/your-username/iphone_lockscreen_calendar/main/docker-compose.yml
+   curl -O https://raw.githubusercontent.com/your-username/iphone_lockscreen_calendar/main/inputs/config.toml.example
+   ```
+
+3. **Configure your settings**
+   ```bash
+   mkdir -p inputs/backgrounds
+   cp config.toml.example inputs/config.toml
+   # Edit inputs/config.toml with your AWS credentials and calendar URLs
+   ```
+
+4. **Add background images**
+   ```bash
+   # Place your PNG background images in inputs/backgrounds/
+   cp your-backgrounds/*.png inputs/backgrounds/
+   ```
+
+5. **Start the container**
+   ```bash
+   docker-compose up -d
+   ```
+
+### Option 2: Build from Source
 
 1. **Clone the repository**
    ```bash
@@ -46,9 +79,9 @@ Transform your iPhone lockscreen into a dynamic calendar display that automatica
    cp your-backgrounds/*.png inputs/backgrounds/
    ```
 
-4. **Start the container**
+4. **Build and start the container**
    ```bash
-   docker-compose up -d
+   docker-compose up -d --build
    ```
 
 5. **Monitor the logs**
@@ -56,9 +89,14 @@ Transform your iPhone lockscreen into a dynamic calendar display that automatica
    docker-compose logs -f
    ```
 
+6. **Monitor the logs**
+   ```bash
+   docker-compose logs -f
+   ```
+
 Your lockscreen will be available at: `https://your-bucket.s3.amazonaws.com/lockscreen.jpg`
 
-### Option 2: Local Development
+### Option 3: Local Development
 
 1. **Install dependencies**
    ```bash
@@ -76,6 +114,17 @@ Your lockscreen will be available at: `https://your-bucket.s3.amazonaws.com/lock
    ```bash
    uv run python main.py
    ```
+
+## Docker Images
+
+Pre-built Docker images are automatically created for every commit and available on GitHub Container Registry:
+
+- **Latest**: `ghcr.io/your-username/iphone_lockscreen_calendar:latest`
+- **Tagged releases**: `ghcr.io/your-username/iphone_lockscreen_calendar:v1.0.0`
+
+The images support multiple architectures:
+- `linux/amd64` (Intel/AMD)
+- `linux/arm64` (Apple Silicon, ARM servers)
 
 ## Configuration
 

@@ -2,7 +2,12 @@ version: '3.8'
 
 services:
   lockscreen-generator:
+    # Use pre-built image from GitHub Container Registry
+    # image: ghcr.io/your-username/iphone_lockscreen_calendar:latest
+
+    # Or build from source (uncomment the line below and comment the image line above)
     build: .
+
     container_name: iphone-lockscreen-calendar
     restart: unless-stopped
 
