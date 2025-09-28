@@ -32,7 +32,7 @@ RUN mkdir -p /var/log/lockscreen
 RUN echo '#!/bin/bash\n\
 cd /app\n\
 echo "$(date): Starting lockscreen generation" >> /var/log/lockscreen/cron.log 2>&1\n\
-uv run python main.py >> /var/log/lockscreen/cron.log 2>&1\n\
+/usr/local/bin/uv run python main.py >> /var/log/lockscreen/cron.log 2>&1\n\
 echo "$(date): Lockscreen generation completed" >> /var/log/lockscreen/cron.log 2>&1\n\
 echo "----------------------------------------" >> /var/log/lockscreen/cron.log 2>&1' > /app/run_lockscreen.sh
 
