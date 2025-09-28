@@ -1,0 +1,55 @@
+# iPhone Lockscreen Calendar Generator Configuration
+
+[display]
+# iPhone display dimensions in pixels
+height_px = 2796
+width_px = 1290
+
+[paths]
+# Background images folder (relative to this config file)
+backgrounds_folder = "./backgrounds/"
+
+[aws]
+# AWS S3 configuration for uploading generated images
+access_key_id = 
+secret_access_key = 
+bucket_name = 
+
+[timezone]
+# Timezone for determining "today" and displaying times
+timezone = "Australia/Brisbane"
+
+[layout]
+# Calendar box positioning and styling
+box_left_margin = 0.1      # 10% from left edge
+box_top_position = 0.75    # 75% from bottom (top of box)
+box_width = 0.8            # 80% of screen width
+line_height = 50           # Height of each event line in pixels
+padding = 30               # Internal padding of the text box
+background_alpha = 0.9     # Transparency of the background box (0.0-1.0)
+
+[text]
+# Text formatting options
+font_size = 26             # Font size for event text
+max_title_length = 50      # Maximum characters before truncating event titles
+
+[behavior]
+# Application behavior settings
+past_event_threshold_hours = 1  # Gray out events this many hours before current time
+log_level = "DEBUG"            # Logging level: DEBUG, INFO, WARNING, ERROR
+
+# Calendar feed configurations
+[[calendars]]
+name = "personal"
+url = 
+text_color = "#0b8043"
+
+[[calendars]]
+name = "work"
+url = 
+text_color = "#e67c73"
+
+[[calendars]]
+name = "birthdays"
+url = 
+text_color = "#039be5"

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  lockscreen-generator:
+    build: .
+    container_name: iphone-lockscreen-calendar
+    restart: unless-stopped
+
+    # Mount config file from host (optional - for easy config updates)
+    volumes:
+      - ./inputs/config.toml:/app/inputs/config.toml:ro
+      - ./inputs/backgrounds:/app/inputs/backgrounds:ro
+      - lockscreen-logs:/var/log/lockscreen
+
+    # Environment variables (override config file if needed)
+    environment:
+      - PYTHONUNBUFFERED=1
+      - TZ=Australia/Brisbane
+
+    # Health check
+    healthcheck:
+      test: ["CMD", "test", "-f", "/var/log/lockscreen/cron.log"]
+      interval: 60m
+      timeout: 30s
+      retries: 3
+      start_period: 5m
+
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+# Named volumes for persistent data
+volumes:
+  lockscreen-logs:
+    driver: local
