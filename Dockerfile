@@ -1,18 +1,15 @@
-# Use Python 3.13 slim image as base
-FROM python:3.13-slim
+# Use TeXLive full image as base
+FROM texlive/texlive:latest
 
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies
+# Install system dependencies (Python and other tools)
 RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
     cron \
     curl \
-    texlive-latex-base \
-    texlive-fonts-recommended \
-    texlive-latex-extra \
-    dvipng \
-    cm-super \
     && rm -rf /var/lib/apt/lists/*
 
 # Install uv for fast Python package management
