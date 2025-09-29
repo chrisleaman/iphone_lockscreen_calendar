@@ -475,7 +475,8 @@ def upload_to_s3(lockscreen_image, image_name="lockscreen.jpg"):
             Key=image_name,
             ExtraArgs={
                 'ContentType': 'image/jpeg',
-                'ACL': 'public-read'  # Make the image publicly accessible
+                'ACL': 'public-read',  # Make the image publicly accessible
+                'CacheControl': 'max-age=60'  # Set cache control for 60 seconds
             }
         )
 
