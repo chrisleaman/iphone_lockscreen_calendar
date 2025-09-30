@@ -214,10 +214,12 @@ def pick_random_background(
     logger.info(f"Found {len(background_files)} background images")
 
     # Set random seed based on today's date for consistent daily backgrounds
-    today = date.today()
+    # Use configured timezone to determine today's date (cron runs in UTC by default)
+    local_tz = timezone(config["timezone"]["timezone"])
+    today = datetime.now(local_tz).date()
     seed = int(today.strftime('%Y%m%d'))
     random.seed(seed)
-    logger.debug(f"Set random seed to {seed} based on date {today}")
+    logger.debug(f"Set random seed to {seed} based on date {today} ({local_tz.zone} time)")
 
     # Pick a random background file (deterministic for the day)
     selected_file = random.choice(background_files)
