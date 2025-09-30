@@ -309,8 +309,9 @@ def generate_lockscreen_image(events, background_image,
     if not events.empty:
         logger.info(f"Processing {len(events)} events for display")
 
-        # Get current time for graying out future events
-        now = datetime.now()
+        # Get current time for graying out future events (use configured timezone)
+        local_tz = timezone(config["timezone"]["timezone"])
+        now = datetime.now(local_tz)
         threshold_hours = config["behavior"]["past_event_threshold_hours"]
         threshold_before_now = now.replace(minute=0, second=0, microsecond=0) - pd.Timedelta(hours=threshold_hours)
         logger.debug(f"Current time: {now.strftime('%H:%M')}, graying out events "
@@ -351,12 +352,8 @@ def generate_lockscreen_image(events, background_image,
             is_past = False
             if hasattr(event['start_time'], 'hour'):
                 event_start = event['start_time']
-                if event_start.tzinfo is None:
-                    event_start_naive = event_start
-                else:
-                    event_start_naive = event_start.replace(tzinfo=None)
-
-                if event_start_naive <= threshold_before_now:
+                # Compare timezone-aware datetimes directly
+                if event_start <= threshold_before_now:
                     is_past = True
 
             # Format time and title
