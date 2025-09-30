@@ -34,13 +34,13 @@ def load_config(config_path="./inputs/config.toml"):
 config = load_config()
 
 # Configure loguru for simple console logging
-logger.remove()  # Remove default handler
-logger.add(
-    sys.stdout,
-    format="<green>{time:HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>",
-    level=config.get("behavior", {}).get("log_level", "DEBUG"),
-    colorize=True
-)
+# logger.remove()  # Remove default handler
+# logger.add(
+#     sys.stdout,
+#     format="<green>{time:HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>",
+#     level=config.get("behavior", {}).get("log_level", "DEBUG"),
+#     colorize=True
+# )
 
 # Extract configuration values
 IPHONE_HEIGHT_PX = config["display"]["height_px"]
